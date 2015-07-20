@@ -1,0 +1,13 @@
+User home
+	- list albums
+	- see/upload photos not in album
+		- option to add photos to an album 
+		- indicate which are and aren't in an album
+
+upload module
+	- add multiple photos
+	- preview and update timestamp
+
+album view
+	- organize photos in order of time taken or time added
+	- link back to user album page

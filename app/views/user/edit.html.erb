@@ -1,0 +1,38 @@
+<h1>User#edit</h1>
+<p>Find me in app/views/user/edit.html.erb</p>
+
+<div class="users edit">
+  <h2>Update User</h2>
+
+  <%= form_for(:user, :url => {:action => 'update', :id => @user.id}) do |f| %>
+
+    <table summary="User form fields">
+      <tr>
+        <th>Username</th>
+        <td><%= f.text_field(:username) %></td>
+      </tr>
+      <tr>
+        <th>Password</th>
+        <td><%= f.text_field(:password) %></td>
+      </tr>
+      <tr>
+        <th>First</th>
+        <td><%= f.text_field(:firstname) %></td>
+      </tr>
+      <tr>
+        <th>Last</th>
+        <td><%= f.text_field(:lastname) %></td>
+      </tr>
+      <tr>
+        <th>E-mail</th>
+        <td><%= f.text_field(:email) %></td>
+      </tr>
+
+    </table>
+
+    <div class="form-buttons">
+      <%= submit_tag("Update User") %>
+    </div>
+
+  <% end %>
+</div>

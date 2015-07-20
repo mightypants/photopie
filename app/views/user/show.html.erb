@@ -1,0 +1,27 @@
+<h1>User#show</h1>
+<p>Find me in app/views/user/show.html.erb</p>
+
+<% if !flash[:notice].blank? %>
+  <div class="notice">
+	<%= flash[:notice] %>
+  </div>
+<% end %>
+
+
+<%= "#{@user.firstname}'s albums:" %>
+<% if !@albums.nil? %>
+  <% @albums.each do |a| %>
+	<%= a.title %>
+	
+  <% end %>
+<% end %>
+
+<br />
+
+<%= "#{@user.firstname}'s photos:" %>
+<br />
+<% if !@photos.nil? %>
+  <% @photos.each do |p| %>
+	<%= image_tag(p.filepath) %>
+  <% end %>
+<% end %>

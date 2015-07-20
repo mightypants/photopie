@@ -1,11 +1,8 @@
 <h1>Login#login</h1>
 <p>Find me in app/views/login/login.html.erb</p>
 
-<% size = "#{@p.width}x#{@p.height}" %>
-<%= image_tag(@p.filepath, :size => size, :alt => @p.caption) %>
+<% link_to("New user", {:action => "new"}, :class => "action new") %>
 
-<%= 2+2 %>
 
-<% @j.photos.each do |p| %>
-  <%= image_tag(p.filepath) %>
-<% end %>  
+
+uuuuuh

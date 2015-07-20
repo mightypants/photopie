@@ -4,4 +4,6 @@ class User < ActiveRecord::Base
   has_many :photos
   has_many :subjects
 
+  scope :sorted, lambda { order("users.id ASC") }
+
 end
