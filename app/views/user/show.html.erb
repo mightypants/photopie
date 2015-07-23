@@ -8,20 +8,15 @@
 <% end %>
 
 
+<%= link_to("New Album", controller: "album", action: "new", :id => @user.id) %><br />
+
+<%= @user.albums.count %> <br />
+
 <%= "#{@user.firstname}'s albums:" %>
 <% if !@albums.nil? %>
   <% @albums.each do |a| %>
-	<%= a.title %>
-	
+	<%= link_to(a.title, :controller => "album", :action => "show", :id => a.id) %>
   <% end %>
 <% end %>
 
 <br />
-
-<%= "#{@user.firstname}'s photos:" %>
-<br />
-<% if !@photos.nil? %>
-  <% @photos.each do |p| %>
-	<%= image_tag(p.filepath) %>
-  <% end %>
-<% end %>

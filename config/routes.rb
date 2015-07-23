@@ -1,6 +1,14 @@
 Rails.application.routes.draw do
 
 
+  get 'album/index'
+
+  get 'album/show'
+
+  get 'album/new'
+
+  get 'album/edit'
+
   root "login#login"
   #get 'login/login'
   match ':controller(/:action(/:id(.:format)))', :via => [:get, :post]

@@ -1,0 +1,36 @@
+<%= error_messages_for(@album) %>
+
+<table summary="Album form fields">
+  <tr>
+    <th><%= f.label(:is_pie_album, "Pie Album") %></th>
+    <td><%= f.check_box(:is_pie_album) %></td>
+  </tr>
+  <tr>
+    <th><%= f.label(:title) %></th>
+    <td><%= f.text_field(:title) %></td>
+  </tr>
+  <tr>
+    <th><%= f.label(:subject_first, "First Name") %></th>
+    <td><%= f.text_field(:subject_first) %></td>
+  </tr>
+  <tr>
+    <th><%= f.label(:subject_middle, "Middle Name") %></th>
+    <td><%= f.text_field(:subject_middle) %></td>
+  </tr>
+  <tr>
+    <th><%= f.label(:subject_last, "Last Name") %></th>
+    <td><%= f.text_field(:subject_last) %></td>
+  </tr>
+  <tr>
+    <th><%= f.label(:subject_dob, "Date of Birth") %></th>
+    <td><%= f.date_select(:subject_dob) %></td>
+  </tr>
+  <tr>
+    <th><%= f.label(:visibility) %></th>
+    <td>
+      <%= f.radio_button(:visibility, 0) %> Private
+      <%= f.radio_button(:visibility, 2) %> Public
+    </td>
+  </tr>
+</table>
+

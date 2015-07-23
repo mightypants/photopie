@@ -38,7 +38,7 @@ class UserController < ApplicationController
     @user = User.find(params[:id])
 
     if @user.update_attributes(user_params)
-      flash[:notice] = "User #{@user.username} successfully"
+      flash[:notice] = "User #{@user.username} updated successfully"
       redirect_to(:action => "show", :id => @user.id)
     else
       render('edit')
@@ -58,6 +58,6 @@ class UserController < ApplicationController
   private
 
     def user_params
-      params.require(:user).permit(:firstname, :lastname, :username, :password, :email)
+      params.require(:user).permit(:firstname, :lastname, :username, :password, :password_confirmation, :email)
     end
 end

@@ -1,0 +1,21 @@
+<h1>Album#new</h1>
+<p>Find me in app/views/album/new.html.erb</p>
+
+<div class="albums new">
+  <h2>Create Album</h2>
+
+  <%= form_for(:album, :url => {:action => 'create', :id => @user}) do |f| %>
+
+    <%= render(:partial => "form", :locals => {:f => f}) %>
+
+    <div class="form-buttons">
+      <%= submit_tag("Create Album") %>
+    </div>
+
+  <% end %>
+</div>
+
+<script type="text/javascript">
+	var d = $('td');
+	console.log(d.length);
+</script>

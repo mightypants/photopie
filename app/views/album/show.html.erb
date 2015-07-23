@@ -1,0 +1,10 @@
+<h1>Album#show</h1>
+<p>Find me in app/views/album/show.html.erb</p>
+
+
+
+<% if !@album.photos.nil? %>
+  <% @album.photos.each do |p| %>
+	<%= image_tag(p.filepath, alt: p.caption) %>
+  <% end %>
+<% end %>

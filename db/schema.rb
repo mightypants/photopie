@@ -11,15 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150716124103) do
+ActiveRecord::Schema.define(version: 20150723022631) do
 
   create_table "albums", force: :cascade do |t|
-    t.string   "title",      limit: 255,                     null: false
-    t.integer  "user_id",    limit: 4,                       null: false
-    t.integer  "cover",      limit: 4,   default: 0,         null: false
-    t.string   "visibility", limit: 255, default: "private"
-    t.datetime "created_at",                                 null: false
-    t.datetime "updated_at",                                 null: false
+    t.string   "title",          limit: 255,                     null: false
+    t.integer  "user_id",        limit: 4,                       null: false
+    t.integer  "cover",          limit: 4,   default: 0,         null: false
+    t.string   "visibility",     limit: 255, default: "private"
+    t.datetime "created_at",                                     null: false
+    t.datetime "updated_at",                                     null: false
+    t.boolean  "is_pie_album",               default: true
+    t.string   "subject_first",  limit: 255
+    t.string   "subject_middle", limit: 255
+    t.string   "subject_last",   limit: 255
+    t.date     "subject_dob"
   end
 
   add_index "albums", ["user_id"], name: "index_albums_on_user_id", using: :btree
@@ -33,9 +38,8 @@ ActiveRecord::Schema.define(version: 20150716124103) do
   add_index "albums_photos", ["album_id", "photo_id"], name: "index_albums_photos_on_album_id_and_photo_id", using: :btree
 
   create_table "albums_users", id: false, force: :cascade do |t|
-    t.integer "album_id",    limit: 4
-    t.integer "user_id",     limit: 4
-    t.integer "permissions", limit: 4, default: 0
+    t.integer "album_id", limit: 4
+    t.integer "user_id",  limit: 4
   end
 
   add_index "albums_users", ["album_id", "user_id"], name: "index_albums_users_on_album_id_and_user_id", using: :btree
@@ -71,13 +75,14 @@ ActiveRecord::Schema.define(version: 20150716124103) do
   add_index "subjects", ["user_id"], name: "index_subjects_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
-    t.string   "username",   limit: 20,  null: false
-    t.string   "password",   limit: 255, null: false
-    t.string   "email",      limit: 40,  null: false
-    t.string   "firstname",  limit: 20
-    t.string   "lastname",   limit: 40
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.string   "username",        limit: 20,  null: false
+    t.string   "email",           limit: 40,  null: false
+    t.string   "firstname",       limit: 20
+    t.string   "lastname",        limit: 40
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.string   "password_digest", limit: 255
+    t.boolean  "is_admin"
   end
 
 end

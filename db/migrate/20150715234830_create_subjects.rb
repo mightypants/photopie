@@ -5,7 +5,7 @@ class CreateSubjects < ActiveRecord::Migration
       t.string :middlename
       t.string :lastname
       t.date :birth_date, null: false
-      t.references :user, null: false
+      t.integer :user_id, null: false
       t.integer :pie_album
       t.timestamps null: false
     end

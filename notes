@@ -1,7 +1,9 @@
 User home
 	- list albums
-	- see/upload photos not in album
-		- option to add photos to an album 
+	- link to library
+		- shows all photos, including those not in any album
+		- upload new photos independent of albums
+		- option to add photos from library to an album 
 		- indicate which are and aren't in an album
 
 upload module
