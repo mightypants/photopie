@@ -4,7 +4,7 @@
 <div class="albums new">
   <h2>Create Album</h2>
 
-  <%= form_for(:album, :url => {:action => 'create', :id => @user}) do |f| %>
+  <%= form_for(:album, :url => {:action => 'create'}) do |f| %>
 
     <%= render(:partial => "form", :locals => {:f => f}) %>
 

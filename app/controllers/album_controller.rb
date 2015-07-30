@@ -1,4 +1,7 @@
 class AlbumController < ApplicationController
+  
+  before_action :confirm_logged_in
+
   def index
   end
 
@@ -13,17 +16,15 @@ class AlbumController < ApplicationController
 
   def create
   	@album = Album.new(album_params)
-  	owner = User.find(params[:id])
-  	# TODO: this is redundant; remove user_id from albums model
-    @album.user_id = owner.id
-    @album.users << owner
 
     if @album.save
+      album_user = AlbumUser.create(album_id: @album.id, user_id: session[:user_id], access_type: 2)
       flash[:notice] = "Album created successfully"
-      redirect_to(:controller => "user", :action => "show", :id => owner.id)
+      redirect_to(:controller => "user", :action => "show", :id => session[:user_id])
     else
       render("new")
     end
+
   end  
 
   def edit
@@ -32,6 +33,6 @@ class AlbumController < ApplicationController
   private
 
     def album_params
-      params.require(:album).permit(:title, :subject_first, :subject_last, :subject_middle, :subject_dob, :visibility)
+      params.require(:album).permit(:title, :subject_first, :subject_last, :subject_middle, :subject_dob, :visibility, :is_pie_album)
     end
 end

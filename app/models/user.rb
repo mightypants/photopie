@@ -2,9 +2,9 @@ class User < ActiveRecord::Base
   
   has_secure_password
 
-  has_and_belongs_to_many :albums
   has_many :photos
-  has_many :subjects
+  has_many :album_users # Users with access to the album
+  has_many :albums, :through => :album_users
 
   EMAIL_REGEX = /\w{2,}@\w{2,}\.\w{2,}/
   validates :username, presence: true, 

@@ -1,6 +1,8 @@
 class UserController < ApplicationController
   
   #layout "admin"
+  
+  before_action :confirm_logged_in
 
   def index
     # if logged in user and not admin, redirect to 'show' page
