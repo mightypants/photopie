@@ -5,7 +5,7 @@ class UserController < ApplicationController
   before_action :confirm_logged_in
 
   def index
-    # if logged in user and not admin, redirect to 'show' page
+    # TODO if logged in user and not admin, redirect to 'show' page
     @users = User.all
 
   end
@@ -27,7 +27,7 @@ class UserController < ApplicationController
       flash[:notice] = "User created successfully"
       redirect_to(:action => "index")
     else
-      render('new')
+      render("new")
     end
 
   end
@@ -43,7 +43,7 @@ class UserController < ApplicationController
       flash[:notice] = "User #{@user.username} updated successfully"
       redirect_to(:action => "show", :id => @user.id)
     else
-      render('edit')
+      render("edit")
     end
 
   end

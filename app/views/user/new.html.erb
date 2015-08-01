@@ -2,13 +2,12 @@
 <p>Find me in app/views/user/new.html.erb</p>
 
 
-<%= link_to("<< Back to List", {:action => 'index'}, :class => 'back-link') %>
-
+<%= link_to("<< Back to List", {:action => "index"}, :class => "back-link") %>
 
 <div class="users new">
   <h2>Create User</h2>
 
-  <%= form_for(:user, :url => {:action => 'create'}) do |f| %>
+  <%= form_for(:user, :url => {:action => "create"}) do |f| %>
 
     <%= render(:partial => "form", :locals => {:f => f}) %>
 

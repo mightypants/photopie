@@ -12,7 +12,7 @@ class AccessController < ApplicationController
 
   def attempt_login
   	if params[:username].present? && params[:password].present?
-  	  found_user = User.where(username: params[:username]).first
+  	  found_user = User.where(:username => params[:username]).first
   	  if found_user
   	  	authorized_user = found_user.authenticate(params[:password])
   	  end
@@ -21,10 +21,10 @@ class AccessController < ApplicationController
   	  session[:user_id] = authorized_user.id
   	  session[:username] = authorized_user.username
   	  flash[:notice] = "Hurray, you did it."
-  	  redirect_to(controller: 'user', action: 'show', id: session[:user_id])
+  	  redirect_to(:controller => "user", :action => "show", :id => session[:user_id])
   	else
   	  flash[:notice] = "Y'all done messed up."
-  	  redirect_to(action: 'login') 
+  	  redirect_to(action: "login") 
   	end
   end
 
@@ -32,8 +32,7 @@ class AccessController < ApplicationController
     session[:user_id] = nil
     session[:username] = nil
     flash[:notice] = "Y'all done logged out."	
-    redirect_to(action: 'login')
+    redirect_to(action: "login")
   end
-
 
 end

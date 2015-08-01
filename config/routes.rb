@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
 
 
+  get 'photo/new'
+
+  get 'photo/edit'
+
   get 'access/index'
 
   get 'access/login'

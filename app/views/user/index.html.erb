@@ -2,12 +2,12 @@
 <p>Find me in app/views/user/index.html.erb</p>
 
 
-<%= link_to("New", :action => 'new') %>
+<%= link_to("New", :action => "new") %>
 
 <% @users.each do |u| %>
   <p>
-  	<%= link_to(u.username, :action => 'show', :id => u.id) %><br />
-  	<%= link_to("Edit", :action => 'edit', :id => u.id) %>
-  	<%= link_to("Delete", :action => 'destroy', :id => u.id) %>
+  	<%= link_to(u.username, :action => "show", :id => u.id) %><br />
+  	<%= link_to("Edit", :action => "edit", :id => u.id) %>
+  	<%= link_to("Delete", :action => "destroy", :id => u.id) %>
   </p>
 <% end %>

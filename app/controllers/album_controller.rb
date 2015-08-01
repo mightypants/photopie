@@ -11,16 +11,17 @@ class AlbumController < ApplicationController
 
   def new
   	@album = Album.new
-  	@user = params[:id]
+  	@user = session[:user_id]
   end
 
   def create
   	@album = Album.new(album_params)
 
     if @album.save
-      album_user = AlbumUser.create(album_id: @album.id, user_id: session[:user_id], access_type: 2)
+      # Create the join table entry and assign access type of owner
+      album_user = AlbumUser.create(:album_id => @album.id, :user_id => session[:user_id], access_type: 2)
       flash[:notice] = "Album created successfully"
-      redirect_to(:controller => "user", :action => "show", :id => session[:user_id])
+      redirect_to(:controller => "user", :action =>"show", :id => session[:user_id])
     else
       render("new")
     end
