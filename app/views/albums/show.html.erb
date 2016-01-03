@@ -1,0 +1,155 @@
+<h1 id="title"><%= @album.title %></h2>
+
+<%= form_for Photo.new, :url => photos_path, :html => { :multipart => true, :id => "fileupload"  } do |f| %>
+  <%= render(:partial => "photo_uploads", :locals => {:f => f}) %>
+<% end %>
+
+<div class="clearfloat"></div>
+
+<div id="slideshowContainer">
+	<div class="slideshow-nav-left"></div>
+</div>
+
+	<% if !@slices_initial.nil? %>
+	  <% @slices_initial.each do |s| %>
+		<h3><%= s[:display_age] %></h3>
+		  <div class="slicePhotos">
+		  	<% s[:photos].each do |p| %><div class="thumbContainer"><img id ="<%= p.id %>" class="photo" src="<%= p.image.url(:med) %>" alt="<%= "photo #{p.id}" %>" title="<%= p.caption %>" data-urlfull="<%= p.image.url(:original) %>" /></div><% end %>  
+		  </div>
+	  <% end %>
+	<% end %>	
+
+
+	<% if !@slices_lazy.nil? %>
+	  <% @slices_lazy.each do |s| %>
+		<h3 id="<%= s[:display_age] %>" class="placeholder"></h3>
+		  <div class="slicePhotos">
+		  	<% s[:photos].each do |p| %>
+			  <div class="thumbContainer"><span class="placeholder" id="<%= p.id %>" data-urlfull="<%= p.image.url(:original) %>" data-urlThumb="<%= p.image.url(:med) %>" data-caption="<%= p.caption %>"></span></div>
+			<% end %>  
+		  </div>
+	  <% end %>
+	<% end %>
+
+	<script type="text/javascript">
+	$(window).load(function(){
+		initSlideshow();
+		console.log(slideshowPhotos);
+		lazyLoad();
+		
+		setInterval(function(){
+			lazyLoad();
+		}, 500);
+
+		$("#slideshowContainer").click(function(){
+			$(this).children().animate({
+			    opacity:'0',
+			  	}, 'fast', changeSlide);
+		});
+
+		$(".photo").click(function(){
+			startSlideshow($(this));
+		});
+	});
+
+	// TODO: refactor so lazy loads slideshow images same time
+	function lazyLoad(){
+		wH = $(window).height();
+		wY = $(window).scrollTop();
+
+		$('.placeholder').each(function(){		
+			if ($(this).offset().top < (wH + wY) + 200){
+
+				if ($(this).prop('tagName') == 'H3'){
+					$(this).text($(this).attr('id'));
+					$(this).removeClass('placeholder');
+				}
+				else if ($(this).prop('tagName') == 'SPAN'){					
+					img = $('<img class="photo">');
+					img.attr('src', $(this).attr('data-urlThumb'));
+					img.attr('data-urlfull', $(this).attr('data-urlfull'));
+					img.attr('id', $(this).attr('id'));
+					
+					// TODO: make alt and title work
+					// img.attr('title', $(this).attr('title'));
+					// img.attr('alt', $(this).attr('alt'));
+
+					$(this).parent().append(img);
+					$(this).remove();
+				}
+			}
+		});
+	}
+
+	var slideshowPhotos = new Array();
+	var slideshowIndex = 0;
+
+	function initSlideshow(){
+		$(".photo").each(function(){
+			addToSlideshow($(this), 'initial');
+		});
+
+		$(".placeholder").each(function(){
+			if ($(this).prop('tagName') == 'SPAN'){
+				addToSlideshow($(this), 'lazy');
+			}
+		});
+	}
+	
+	// type indicates initial load v. lazy load images
+	function addToSlideshow(photo, type){
+		var slideshowPhoto;
+
+		url = photo.attr('data-urlfull');
+
+		if (type == 'initial'){
+			slideshowPhoto = $('<img class="slideshowPhoto">');
+			slideshowPhoto.attr('data-urlfull', photo.attr('data-urlfull'));
+			slideshowPhoto.attr('src', photo.attr('src').replace('med/', 'original/'));
+		}
+		else if (type == 'lazy') {
+			slideshowPhoto = $('<img class="slidePlaceholder">');
+			slideshowPhoto.attr('data-urlfull', photo.attr('data-urlfull'));
+		}
+		slideshowPhotos.push(slideshowPhoto);
+	}
+	
+	// TODO: update to remove only the current photo, replace;
+	// also add next/prev logic
+	function changeSlide(){
+		slideshowIndex++;
+		lazyLoadSlide(slideshowIndex);
+		$("#slideshowContainer").empty();
+		$("#slideshowContainer").append(slideshowPhotos[slideshowIndex]);
+		$(slideshowPhotos[slideshowIndex]).animate({
+		    opacity:'100',
+		  	}, 'slow');
+	}
+
+	
+	// TODO: make mobile tapping work
+	//$(".photo").on('tap', startSlideshow($(this)));
+
+	function startSlideshow(thumb){
+		// looks for URL in data-urlfull so it can find an image whether or not it has been loaded yet
+		pos = slideshowPhotos.map(function(p){ return p.attr('data-urlfull'); }).indexOf(thumb.attr('data-urlfull'));
+		
+		console.log('clicked photo in position: ' + pos);
+
+		slideshowIndex = pos;
+		lazyLoadSlide(pos);
+		lazyLoadSlide(pos + 1);
+		$(slideshowPhotos[slideshowIndex]).css('opacity', '100');
+		$("#slideshowContainer").append(slideshowPhotos[slideshowIndex]);
+		$("#slideshowContainer").css('display', 'flex');
+		$("body").toggleClass('no-scroll');
+	}
+
+	function lazyLoadSlide(pos){
+		p = slideshowPhotos[pos];
+		p.attr('src', p.attr('data-urlfull'));
+		console.log('next photo in position ' + (slideshowIndex + 1))
+		console.log('next photo' + p);
+		console.log(p.attr('data-urlfull'));
+	}
+	</script>

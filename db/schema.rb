@@ -47,16 +47,15 @@ ActiveRecord::Schema.define(version: 20150801003631) do
   end
 
   create_table "photos", force: :cascade do |t|
-    t.string   "filetype",           limit: 255,   default: "image"
-    t.integer  "user_id",            limit: 4,                       null: false
+    t.integer  "user_id",            limit: 4,     null: false
     t.date     "meta_timestamp"
     t.date     "user_timestamp"
     t.integer  "width",              limit: 4
     t.integer  "height",             limit: 4
     t.text     "caption",            limit: 65535
     t.text     "tags",               limit: 65535
-    t.datetime "created_at",                                         null: false
-    t.datetime "updated_at",                                         null: false
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
     t.string   "image_file_name",    limit: 255
     t.string   "image_content_type", limit: 255
     t.integer  "image_file_size",    limit: 4

@@ -7,10 +7,11 @@ gem 'rails', '4.2.3'
 gem 'mysql2'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
+
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views
-# gem 'coffee-rails', '~> 4.1.0'
+ gem 'coffee-rails', '~> 4.1.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
@@ -29,6 +30,12 @@ gem 'bcrypt', '~> 3.1.7'
 # Paperclip and jquery file upload for uploading photos and videos
 gem "jquery-fileupload-rails"
 gem "paperclip", "~> 4.3"
+gem 'exifr', '~> 1.2.2'
+
+#gem 'therubyracer', :platforms => :ruby
+#gem 'less-rails'
+#gem 'twitter-bootstrap-rails'
+
 
 # Use Unicorn as the app server
 # gem 'unicorn'

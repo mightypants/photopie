@@ -1,24 +1,24 @@
 Rails.application.routes.draw do
 
 
-  get 'photo/new'
-
-  get 'photo/edit'
-
-  get 'access/index'
-
-  get 'access/login'
-
-  get 'album/index'
-
-  get 'album/show'
-
-  get 'album/new'
-
-  get 'album/edit'
 
   root "login#login"
   #get 'login/login'
+
+
+  
+  # TODO: update needed routes for each
+  resources :users
+  resources :albums
+  
+  get 'photos/edit/', to: 'photos#edit'
+
+  resources :photos do
+    member do
+      get :delete
+    end
+  end
+
   match ':controller(/:action(/:id(.:format)))', :via => [:get, :post]
 
   # The priority is based upon order of creation: first created -> highest priority.

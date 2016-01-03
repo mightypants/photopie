@@ -17,11 +17,12 @@ class AccessController < ApplicationController
   	  	authorized_user = found_user.authenticate(params[:password])
   	  end
   	end
+    
   	if authorized_user
   	  session[:user_id] = authorized_user.id
   	  session[:username] = authorized_user.username
   	  flash[:notice] = "Hurray, you did it."
-  	  redirect_to(:controller => "user", :action => "show", :id => session[:user_id])
+  	  redirect_to(:controller => "users", :action => "show", :id => session[:user_id])
   	else
   	  flash[:notice] = "Y'all done messed up."
   	  redirect_to(action: "login") 

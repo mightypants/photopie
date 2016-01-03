@@ -1,0 +1,41 @@
+<h1>Photo#edit</h1>
+<p>Find me in app/views/photo/edit.html.erb</p>
+
+
+<%= form_tag("update")do %>  
+
+  <% for p in @photos %>
+    <% timestamp = p.get_timestamp.nil? ? "" : p.get_timestamp %> 
+    <%= image_tag(p.image.url(:large), :class => "photo") %>
+
+    <%= fields_for "photos[]", p do |f| %>  
+      <%= f.label(:caption) %>
+      <%= f.text_field(:caption) %>
+      <%= f.label(:user_timestamp, "Date") %>
+      <%= f.text_field(:user_timestamp, :value => timestamp) %><br />
+    <% end %>  
+  <% end %>  
+  <p><%= submit_tag "Submit" %></p>  
+<% end %> 
+
+<script>
+  // $(".photo").click(function() {
+  //     console.log("heeeeee");
+      
+  //     EXIF.getData($(this)[0], function() {
+  //                 console.log($(this)[0]);
+
+  //                 var dateO = EXIF.getTag(this, "DateTime");
+  //                 var dateD = EXIF.getTag(this, "ColorSpace");
+
+  //                 console.log("DO: " + dateO);
+  //                 console.log("DD: " + dateD);
+  //             });
+      
+  //   });
+
+
+
+</script>
+
+

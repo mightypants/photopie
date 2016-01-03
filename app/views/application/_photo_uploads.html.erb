@@ -1,0 +1,48 @@
+<!--<span class="dropzone">add photos</span>-->
+<%= f.file_field :image, :hidden => true %>
+<%= text_field_tag(:album_id, @album.id, :hidden => true) %>
+
+
+<script>
+  var fileUploadErrors = {
+  maxFileSize: 'File is too big',
+  minFileSize: 'File is too small',
+  acceptFileTypes: 'Filetype not allowed',
+  maxNumberOfFiles: 'Max number of files exceeded',
+  uploadedBytes: 'Uploaded bytes exceed file size',
+  emptyResult: 'Empty file upload result'
+  };
+</script>
+
+<script type="text/javascript" charset="utf-8">
+  var photoIDs = [];
+
+  $(function () {
+      // Initialize the jQuery File Upload widget:
+      $('#fileupload').fileupload({
+          limitMultiFileUploads: 5,
+          dataType:'json',
+          acceptFileTypes: /(\.|\/)(gif|jpe?g)$/i,
+          //dropZone: $(".dropzone"),
+          done: function (e, data) {
+              //photoIDs.push(data.result.files[0].id);
+              //console.log(photoIDs);
+              //url = '/photos/edit/' + photoIDs;
+              //$( location ).attr("href", url)
+              //console.log(data.loaded);
+
+              if(data.loaded == data.total){alert("Go team Venture!")};
+          },
+
+      });
+
+
+      
+
+
+  });
+
+  
+
+</script>
+

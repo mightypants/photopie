@@ -16,7 +16,7 @@ class LoginController < ApplicationController
   	end
   	if authorized_user
   	  flash[:notice] = "Hurray, you did it."
-  	  redirect_to(:controller => "user", :action => "show", :id => authorized_user.id)
+  	  redirect_to(:controller => "users", :action => "show", :id => authorized_user.id)
   	else
   	  flash[:notice] = "Y'all done messed up."
   	  redirect_to(:action => "login") 

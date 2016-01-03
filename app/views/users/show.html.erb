@@ -1,0 +1,22 @@
+
+<%= link_to("New Album", :controller => "albums", :action => "new") %><br />
+
+<%= "#{@user.firstname}'s albums:" %>
+<br />
+<% if !@albums.nil? %>
+  <% @albums.each do |a| %>
+	<%= link_to(a.title, :controller => "albums", :action => "show", :id => a.id) %>
+  <% end %>
+<% end %>
+
+<br />
+
+<%= "#{@user.firstname}'s photos:" %>
+<br />
+<% if !@photos.nil? %>
+  <% @photos.each do |p| %>
+	<%= image_tag(p.image.url(:large), :alt => p.caption) %>
+  <% end %>
+<% end %>
+
+<br />
